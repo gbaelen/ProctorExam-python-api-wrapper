@@ -3,8 +3,8 @@ import os
 
 sys.path.append( os.path.join( os.path.dirname(__file__), '..' ) )
 
-from src.core.Session import Session
-from src.exam.Exam import Exam
+from src.Core.Session import Session
+from src.Endpoints.Exam import Exam
 
 class Proctorexam():
     """
@@ -17,5 +17,6 @@ class Proctorexam():
         return domain.replace("https://", "").replace("http://", "").replace(".proctorexam.com", "")
 
 if __name__ == "__main__":
-    proctorexam = Proctorexam("")
-    print(proctorexam.exam.get("/exams/8", {"id": "8"}))
+    proctorexam = Proctorexam("webrtc")
+    #print(proctorexam.exam.get("/exams/8", {"id": "8"}))
+    print(proctorexam.exam.get())

@@ -5,7 +5,7 @@ from collections import namedtuple
 
 sys.path.append( os.path.join( os.path.dirname(__file__), '..' ) )
 
-from src.core import Signer
+from src.Core import Signer
 
 Credentials = namedtuple('Credentials', 'key secret')
 
