@@ -1,7 +1,7 @@
 import json
 
-from src.Core.Api import Api
-from src.Classes.Exam import ExamList, Exam
+from Proctorexam.Core.Api import Api
+from Proctorexam.Classes.Exam import ExamList, Exam
 
 class ExamConnector(Api):
     def __init__(self, session, domain):

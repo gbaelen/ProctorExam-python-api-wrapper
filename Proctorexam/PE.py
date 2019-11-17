@@ -3,11 +3,11 @@ import os
 
 sys.path.append( os.path.join( os.path.dirname(__file__), '..' ) )
 
-from src.Core.Session import Session
-from src.Endpoints.ExamConnector import ExamConnector
-from src.Endpoints.StudentConnector import StudentConnector
+from Proctorexam.Core.Session import Session
+from Proctorexam.Endpoints.ExamConnector import ExamConnector
+from Proctorexam.Endpoints.StudentConnector import StudentConnector
 
-class Proctorexam():
+class PE():
     """
     """
     def __init__(self, domain, key=None, secret=None, region=None):

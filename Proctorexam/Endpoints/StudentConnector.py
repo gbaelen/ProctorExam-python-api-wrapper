@@ -1,4 +1,4 @@
-from src.Core.Api import Api
+from Proctorexam.Core.Api import Api
 
 class StudentConnector(Api):
     def __init__(self, session, domain):

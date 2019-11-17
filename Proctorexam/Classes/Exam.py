@@ -38,7 +38,6 @@ class Exam():
         return Exam(**data)
 
     def get_exam_type(self):
-        print(self.mode)
         if self.mode[4] is "1":
             return "Live Proctoring"
         elif self.mode[3] is "1":
