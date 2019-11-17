@@ -24,7 +24,7 @@ class Api():
 
         full_url = url + "?" + base_string.replace("?", "&")
         response = requests.get(full_url+"&signature="+signature, headers=self.header)
-        print(response.content)
+        return response.content
 
     def clean_path(self, path):
         if path[0] is "/":

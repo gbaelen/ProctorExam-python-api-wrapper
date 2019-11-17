@@ -1,6 +1,6 @@
 from src.Core.Api import Api
 
-class Student(Api):
+class StudentConnector(Api):
     def __init__(self, session, domain):
         Api.__init__(self, session, domain)
         self.session = session
