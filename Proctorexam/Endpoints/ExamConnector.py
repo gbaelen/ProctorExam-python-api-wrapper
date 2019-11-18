@@ -43,5 +43,13 @@ class ExamConnector(Api):
     def post(self, path=None, param=None):
         path = self.check_default_path(path)
 
-        reponse = self._Api_post(path, param)
+        if param is None:
+            raise Exception("Params in post cannot be empty!")
+        else:
+            if param["name"] is None:
+                raise Exception("Exam name is a required param but not found")
+            if param["type"] is None:
+                raise Exception("Exam type is a required param but not found")
+
+        response = self._Api__post(path, param)
         return self.process_post_response(path, response)

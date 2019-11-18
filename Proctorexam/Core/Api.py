@@ -8,7 +8,7 @@ class Api():
         self.session = session
         self.domain = domain
         self.prefix = "/api/v3/"
-        self.url_template = "https://{}.proctorexam.com{}{}"
+        self.url_template = "https://{}.proctorexam.com:3001{}{}"
         self.header = {
             "Accept": "application/vnd.procwise.v3",
             "Authorization": "Token token={}".format(self.session.get_key()),
@@ -29,27 +29,27 @@ class Api():
         param["nonce"] = str(int(datetime.timestamp(datetime.now()) * 1000))
         param["timestamp"] = str(int(datetime.timestamp(datetime.now()) * 1000))
 
-        return url, self.session.create_signature(param)
+        base_string, signature = self.session.create_signature(param)
+
+        return url, base_string, signature, param
 
 
     def __get(self, path, param):
         _, base_string, signature, __ = self.prepare_request(path, param)
-
         full_url = url + "?" + base_string.replace("?", "&")
+
         response = requests.get(full_url+"&signature="+signature, headers=self.header)
         return response.content
 
     def __post(self, path, param):
         url, base_string, signature, params = self.prepare_request(path, param)
+        params["signature"] = signature
 
-        #TODO: check syntax
-        response = requests.post(url, params=params, headers=self.header)
+        response = requests.post(url, json=params, headers=self.header, verify=False)
+        return response.content
 
     def patch(self, param):
         pass
 
     def put(self, param):
-        pass
-
-    def request(self, param):
         pass
