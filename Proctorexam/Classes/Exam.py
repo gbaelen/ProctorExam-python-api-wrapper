@@ -1,5 +1,5 @@
 class Exam():
-    def __init__(self, id=None, institute_id=None, name="", terms=None, created_at=None, updated_at=None, duration_minutes=None, clipboard=None, start_time=None, mode=None, upload_answers=None, token=None, user_id=None, end_time=None, restrictions=None, published=None, status=None, for_reviewing=None, uploaded_exam_documents_file_name=None, uploaded_exam_documents_content_type=None, uploaded_exam_documents_file_size=None, uploaded_exam_documents_updated_at=None, timezone=None, use_duration=None, global_reviewing=None, global_proctoring=None, exam_language=None, archived=None, web_cam=None, mobile_cam=None, screen_share=None, live_proctoring=None):
+    def __init__(self, id=None, institute_id=None, name="", terms=None, created_at=None, updated_at=None, duration_minutes=None, clipboard=None, start_time=None, mode=None, upload_answers=None, token=None, user_id=None, end_time=None, restrictions=None, published=None, status=None, for_reviewing=None, uploaded_exam_documents_file_name=None, uploaded_exam_documents_content_type=None, uploaded_exam_documents_file_size=None, uploaded_exam_documents_updated_at=None, timezone=None, use_duration=None, global_reviewing=None, global_proctoring=None, exam_language=None, archived=None, web_cam=None, mobile_cam=None, screen_share=None, live_proctoring=None, connector=None):
         self.id = id
         self.institute_id = institute_id
         self.name = name
@@ -32,6 +32,7 @@ class Exam():
         self.mobile_cam = mobile_cam
         self.screen_share = screen_share
         self.live_proctoring = live_proctoring
+        self.connector = connector
 
     @staticmethod
     def generate_exam_from_response(data):
@@ -44,6 +45,19 @@ class Exam():
             return "Record&Review"
         else:
             return "Classroom"
+
+    def is_mobile_on(self):
+        #TODO: Confirm 3 is the mobile
+        if self.mode[3] is "1":
+            return True
+
+        return False
+
+    def update(self):
+        """
+        Potentially: Will call the connector to update the exam and get the created exam to replace update values here and diplay them
+        """
+        pass
 
 class ExamList():
     def __init__(self):
@@ -62,8 +76,14 @@ class ExamList():
         else:
             raise StopIteration
 
+    def __getitem__(self, key):
+        return self.__exams[key]
+
     def add(self, exam):
         self.__exams.append(exam)
+
+    def remove_at(self, id):
+        self.__exams.pop(id)
 
     def size(self):
         return len(self.__exams)
