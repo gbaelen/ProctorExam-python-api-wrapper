@@ -35,8 +35,8 @@ class Exam():
         self.connector = connector
 
     @staticmethod
-    def generate_exam_from_response(data):
-        return Exam(**data)
+    def generate_exam_from_response(data, connector=None):
+        return Exam(**data, connector=connector)
 
     def get_exam_type(self):
         if self.mode[4] is "1":
@@ -57,6 +57,15 @@ class Exam():
         """
         Potentially: Will call the connector to update the exam and get the created exam to replace update values here and diplay them
         """
+        pass
+
+    def delete(self):
+        pass
+
+    def get_students(self):
+        pass
+
+    def search_student_by_email(self):
         pass
 
 class ExamList():
@@ -87,3 +96,6 @@ class ExamList():
 
     def size(self):
         return len(self.__exams)
+
+    def find_student():
+        pass

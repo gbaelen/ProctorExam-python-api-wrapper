@@ -12,7 +12,7 @@ class ExamConnector(Api):
     def create_exam_list(self, response_json):
         exam_list = ExamList()
         for exam_json in response_json["exams"]:
-            exam = Exam.generate_exam_from_response(exam_json, self)
+            exam = Exam.generate_exam_from_response(exam_json, connector=self)
             exam_list.add(exam)
 
         return exam_list
@@ -34,11 +34,20 @@ class ExamConnector(Api):
     def process_post_response(self, path, response):
         return "Not implemented yet!"
 
+    def process_patch_response(self, path, response):
+        return "Not implemented yet!"
+
     def get(self, path=None, param={}):
         path = self.check_default_path(path)
 
         response = self._Api__get(path, param)
         return self.process_get_response(path, response)
+
+    def get_all_students_in_exam(self, id):
+        path = "exams/{}/index_students".format(id)
+
+        response = self._Api__get(path, {"id":id})
+        return response
 
     def post(self, path=None, param=None):
         path = self.check_default_path(path)
@@ -53,3 +62,9 @@ class ExamConnector(Api):
 
         response = self._Api__post(path, param)
         return self.process_post_response(path, response)
+
+    def patch(self, id, param={}):
+        path = "exams/" + id
+
+        response = self._Api__patch(path, param)
+        return self.process_patch_response(path, response)

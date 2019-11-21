@@ -30,15 +30,14 @@ class Api():
         param["timestamp"] = str(int(datetime.timestamp(datetime.now()) * 1000))
 
         base_string, signature = self.session.create_signature(param)
-
         return url, base_string, signature, param
 
 
     def __get(self, path, param):
-        _, base_string, signature, __ = self.prepare_request(path, param)
+        url, base_string, signature, __ = self.prepare_request(path, param)
         full_url = url + "?" + base_string.replace("?", "&")
 
-        response = requests.get(full_url+"&signature="+signature, headers=self.header)
+        response = requests.get(full_url+"&signature="+signature, headers=self.header, verify=False)
         return response.content
 
     def __post(self, path, param):
@@ -48,8 +47,12 @@ class Api():
         response = requests.post(url, json=params, headers=self.header, verify=False)
         return response.content
 
-    def patch(self, param):
-        pass
+    def __patch(self, path, param):
+        url, base_string, signature, params = self.prepare_request(path, param)
+        params["signature"] = signature
+
+        response = requests.patch(url, json=params, headers=self.header, verify=False)
+        return response.content
 
     def put(self, param):
         pass
