@@ -8,7 +8,7 @@ class Api():
         self.session = session
         self.domain = domain
         self.prefix = "/api/v3/"
-        self.url_template = "https://{}.proctorexam.com:3001{}{}"
+        self.url_template = "https://{}.proctorexam.com{}{}"
         self.header = {
             "Accept": "application/vnd.procwise.v3",
             "Authorization": "Token token={}".format(self.session.get_key()),
@@ -37,21 +37,21 @@ class Api():
         url, base_string, signature, __ = self.prepare_request(path, param)
         full_url = url + "?" + base_string.replace("?", "&")
 
-        response = requests.get(full_url+"&signature="+signature, headers=self.header, verify=False)
+        response = requests.get(full_url+"&signature="+signature, headers=self.header)
         return response.content
 
     def __post(self, path, param):
         url, base_string, signature, params = self.prepare_request(path, param)
         params["signature"] = signature
 
-        response = requests.post(url, json=params, headers=self.header, verify=False)
+        response = requests.post(url, json=params, headers=self.header)
         return response.content
 
     def __patch(self, path, param):
         url, base_string, signature, params = self.prepare_request(path, param)
         params["signature"] = signature
 
-        response = requests.patch(url, json=params, headers=self.header, verify=False)
+        response = requests.patch(url, json=params, headers=self.header)
         return response.content
 
     def put(self, param):
