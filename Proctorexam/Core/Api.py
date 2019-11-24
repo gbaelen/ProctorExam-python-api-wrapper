@@ -58,5 +58,16 @@ class Api():
         response = requests.patch(url, json=params, headers=self.header, verify=self.verify)
         return response.content
 
-    def put(self, param):
-        pass
+    def __delete(self, path, param):
+        url, base_string, signature, params = self.prepare_request(path, param)
+        params["signature"] = signature
+
+        response = requests.delete(url, json=params, headers=self.header, verify=self.verify)
+        return response.content
+
+    def __put(self, param):
+        url, base_string, signature, params = self.prepare_request(path, param)
+        params["signature"] = signature
+
+        response = requests.put(url, json=params, headers=self.header, verify=self.verify)
+        return response.content

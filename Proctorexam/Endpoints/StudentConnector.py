@@ -16,7 +16,13 @@ class StudentConnector(Api):
             path = self.clean_path(path)
         return path
 
+    def process_post_response(self, path, response):
+        print(response)
+
     def process_patch_response(self, path, response):
+        print(response)
+
+    def process_delete_response(self, response):
         print(response)
 
     def process_get_response(self, path, response):
@@ -43,18 +49,33 @@ class StudentConnector(Api):
         return self.process_get_response(path, response)
 
     def get_by(self, id, path=None, param={}):
-        path = "student_sessions/" + str(id)
+        path = f"student_sessions/{id}"
         if "id" not in param:
             param["id"] = id
 
         response = self._Api__get(path, param)
         return self.process_get_response(path, response)
 
-    def patch(self, id, param={}):
-        path = "student_sessions/" + id
+    def add_to_exam(self, exam_id, params={}):
+        path = f"exams/{exam_id}/student_sessions"
+
+        if "id" not in param:
+            param["id"] = exam_id
+
+        response = self._Api__post(path, param)
+        return self.process_post_response(path, response)
+
+    def edit_student(self, id, param={}):
+        path = f"student_sessions/{id}"
 
         if "id" not in param:
             param["id"] = id
 
         response = self._Api__patch(path, param)
         return self.process_patch_response(path, response)
+
+    def delete(self, id):
+        path = f"student_sessions/{id}"
+
+        response = self._Api__delete(path, {"id": id})
+        return self.process_delete_response(response)
