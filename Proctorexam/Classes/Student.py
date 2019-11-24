@@ -89,8 +89,8 @@ class StudentList():
     def add (self, student):
         self.__students.append(student)
 
-    def remove_at(self, id):
-        self.__students.pop(id)
+    def remove_at(self, index):
+        self.__students.pop(index)
 
     def size(self):
         return len(self.__students)
