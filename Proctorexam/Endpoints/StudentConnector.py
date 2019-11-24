@@ -4,8 +4,8 @@ from Proctorexam.Core.Api import Api
 from Proctorexam.Classes.Student import StudentList, Student
 
 class StudentConnector(Api):
-    def __init__(self, session, domain):
-        Api.__init__(self, session, domain)
+    def __init__(self, session, domain, verify=True):
+        Api.__init__(self, session, domain, verify)
         self.session = session
         self.domain = domain
 
@@ -24,9 +24,11 @@ class StudentConnector(Api):
             return self.create_student_list(json.loads(response))
         else:
             print("error")
+            print(response)
 
     def create_student_list(self, response_json):
         student_list = StudentList()
+        print(response_json)
         for student_json in response_json["students"]:
             print(student_json)
             student = Student.generate_student_from_response(student_json, connector=self)
@@ -40,8 +42,19 @@ class StudentConnector(Api):
         response = self._Api__get(path, param)
         return self.process_get_response(path, response)
 
+    def get_by(self, id, path=None, param={}):
+        path = "student_sessions/" + str(id)
+        if "id" not in param:
+            param["id"] = id
+
+        response = self._Api__get(path, param)
+        return self.process_get_response(path, response)
+
     def patch(self, id, param={}):
         path = "student_sessions/" + id
+
+        if "id" not in param:
+            param["id"] = id
 
         response = self._Api__patch(path, param)
         return self.process_patch_response(path, response)

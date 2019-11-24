@@ -10,10 +10,10 @@ from Proctorexam.Endpoints.StudentConnector import StudentConnector
 class PE():
     """
     """
-    def __init__(self, domain, key=None, secret=None, region=None):
+    def __init__(self, domain, key=None, secret=None, region=None, verify=False):
         self.session = Session.create_credentials(key, secret)
         self.exam = ExamConnector(self.session, self.clean_domain(domain))
-        self.student = StudentConnector(self.session, self.clean_domain(domain))
+        self.student = StudentConnector(self.session, self.clean_domain(domain), verify)
 
     def clean_domain(self, domain):
         return domain.replace("https://", "").replace("http://", "").replace(".proctorexam.com", "")

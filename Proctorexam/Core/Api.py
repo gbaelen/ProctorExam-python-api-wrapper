@@ -4,16 +4,20 @@ import requests
 from datetime import datetime
 
 class Api():
-    def __init__(self, session, domain):
+    def __init__(self, session, domain, verify=True):
         self.session = session
         self.domain = domain
         self.prefix = "/api/v3/"
-        self.url_template = "https://{}.proctorexam.com{}{}"
+        if verify:
+            self.url_template = "https://{}.proctorexam.com{}{}"
+        else:
+            self.url_template = "https://{}.proctorexam.com:3001{}{}"
         self.header = {
             "Accept": "application/vnd.procwise.v3",
             "Authorization": "Token token={}".format(self.session.get_key()),
             "Content-Type": "application/json"
         }
+        self.verify = verify
 
     def clean_path(self, path):
         if path[0] is "/":
@@ -37,21 +41,21 @@ class Api():
         url, base_string, signature, __ = self.prepare_request(path, param)
         full_url = url + "?" + base_string.replace("?", "&")
 
-        response = requests.get(full_url+"&signature="+signature, headers=self.header)
+        response = requests.get(full_url+"&signature="+signature, headers=self.header, verify=self.verify)
         return response.content
 
     def __post(self, path, param):
         url, base_string, signature, params = self.prepare_request(path, param)
         params["signature"] = signature
 
-        response = requests.post(url, json=params, headers=self.header)
+        response = requests.post(url, json=params, headers=self.header, verify=self.verify)
         return response.content
 
     def __patch(self, path, param):
         url, base_string, signature, params = self.prepare_request(path, param)
         params["signature"] = signature
 
-        response = requests.patch(url, json=params, headers=self.header)
+        response = requests.patch(url, json=params, headers=self.header, verify=self.verify)
         return response.content
 
     def put(self, param):
