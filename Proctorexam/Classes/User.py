@@ -1,5 +1,11 @@
 class User():
-    def __init__(self, data, connector=None):
+    def __init__(self, id=None, email=None, name=None, role=None, logo_image=None, institute_name=None, connector=None):
+        self.id=id
+        self.email=email
+        self.name=name
+        self.role=role
+        self.logo_image=logo_image
+        self.institute_name=institute_name
         self.connector = connector
 
     @staticmethod

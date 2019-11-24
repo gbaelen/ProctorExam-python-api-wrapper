@@ -4,8 +4,8 @@ from Proctorexam.Core.Api import Api
 from Proctorexam.Classes.User import User
 
 class UserConnector(Api):
-    def __init__(self, session, domain):
-        Api.__init__(self, session, domain)
+    def __init__(self, session, domain, verify):
+        Api.__init__(self, session, domain, verify)
         self.session = session
         self.domain = domain
 
@@ -29,7 +29,7 @@ class UserConnector(Api):
 
     def get_user(self, institute_id, user_id):
         path = f"institutes/{institute_id}/users/{user_id}"
-        param = {"id": user_id, "institute_id": institute_id}
+        param = {"id": user_id, "institute_id": institute_id}
 
         response = self._Api__get(path, param)
         return self.process(response)
@@ -42,7 +42,7 @@ class UserConnector(Api):
                     "email": email,
                     "password": password,
                     "password_confirmation": password_confirmation,
-                    "role": role
+                    "role": role
                 }
 
         response = self._Api__post(path, param)

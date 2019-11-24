@@ -74,9 +74,9 @@ class ExamConnector(Api):
     def get_student_in_exam_by_lti_id(self, student_lms_id, resource_link_id, exam_id):
         path = f"exams/{id}/show_lti_student"
         param = {
-            "student_lms_id": lms_id,
-            "resource_link_id": resource_link_id,
-            "id": id
+            "student_lms_id": lms_id,
+            "resource_link_id": resource_link_id,
+            "id": id
         }
 
         response = self._Api__get(path, param)
@@ -135,7 +135,7 @@ class ExamConnector(Api):
         response = self._Api__delete(path, {"id": id})
         return self.process_delete_response(response)
 
-    delete_comanager(self, exam_id, user_id):
+    def delete_comanager(self, exam_id, user_id):
         path = f"exams/{id}/remove_comanager"
         param = {"id": id, "comanager_id": user_id}
 
