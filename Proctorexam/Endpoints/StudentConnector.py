@@ -48,7 +48,7 @@ class StudentConnector(Api):
         response = self._Api__get(path, param)
         return self.process_get_response(path, response)
 
-    def get_by(self, id, path=None, param={}):
+    def get_student(self, id, path=None, param={}):
         path = f"student_sessions/{id}"
         if "id" not in param:
             param["id"] = id
