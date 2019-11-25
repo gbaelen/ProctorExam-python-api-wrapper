@@ -1,3 +1,15 @@
+import enum
+
+class Role(enum.Enum):
+    SUPERUSER="superuser"
+    ADMINISTRATOR="administrator"
+    TEACHER="teacher"
+    PROCTOR="proctor"
+    GLOBAL_PROCTOR="global_proctor"
+    REVIEWER="reviewer"
+    GLOBAL_REVIEWER="global_reviewer"
+    AUDITOR="auditor"
+
 class User():
     def __init__(self, id=None, email=None, name=None, role=None, logo_image=None, institute_name=None, connector=None):
         self.id=id
