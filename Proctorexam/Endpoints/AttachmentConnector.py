@@ -31,7 +31,7 @@ class AttachmentConnector(Api):
 
     def delete_attachment(self, exam_id, attachment_id):
         path = f"exams/{exam_id}/attachments/{attachment_id}"
-        param = {"id": attachment_id, "exam_id": exam_id}
+        param = {"id": attachment_id, "exam_id": exam_id}
 
         response = self._Api__delete(path, param)
         return response

@@ -46,7 +46,7 @@ class InstituteConnector(Api):
 
     def delete_institute(self, id):
         path = f"institutes/{id}"
-        param = {"id": id}
+        param = {"id": id}
 
         response = self._Api__delete(path, param)
         return response
