@@ -4,8 +4,8 @@ from Proctorexam.Core.Api import Api
 from Proctorexam.Classes.Exam import ExamList, Exam
 
 class ExamConnector(Api):
-    def __init__(self, session, domain):
-        Api.__init__(self, session, domain)
+    def __init__(self, session, domain, verify):
+        Api.__init__(self, session, domain, verify)
         self.session = session
         self.domain = domain
 

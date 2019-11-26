@@ -4,14 +4,14 @@ import os
 sys.path.append( os.path.join( os.path.dirname(__file__), '..' ) )
 
 from Proctorexam.Core.Session import Session
-from Proctorexam.Endpoints import ExamConnector, StudentConnector, UserConnector
+from Proctorexam.Endpoints import ExamConnector, StudentConnector, UserConnector, InstituteConnector
 
 class PE():
     """
     """
     def __init__(self, domain, key=None, secret=None, region=None, verify=False):
         self.session = Session.create_credentials(key, secret)
-        self.exam = ExamConnector(self.session, self.clean_domain(domain))
+        self.exam = ExamConnector(self.session, self.clean_domain(domain), verify)
         self.student = StudentConnector(self.session, self.clean_domain(domain), verify)
         self.user = UserConnector(self.session, self.clean_domain(domain), verify)
 
