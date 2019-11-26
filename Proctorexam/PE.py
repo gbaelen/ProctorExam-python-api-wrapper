@@ -4,7 +4,7 @@ import os
 sys.path.append( os.path.join( os.path.dirname(__file__), '..' ) )
 
 from Proctorexam.Core.Session import Session
-from Proctorexam.Endpoints import ExamConnector, StudentConnector, UserConnector, InstituteConnector
+from Proctorexam.Endpoints import ExamConnector, StudentConnector, UserConnector, InstituteConnector, DocumentConnector, AttachmentConnector
 
 class PE():
     """
@@ -14,7 +14,9 @@ class PE():
         self.exam = ExamConnector(self.session, self.clean_domain(domain), verify)
         self.student = StudentConnector(self.session, self.clean_domain(domain), verify)
         self.user = UserConnector(self.session, self.clean_domain(domain), verify)
-
+        self.document = DocumentConnector(self.session, self.clean_domain(domain), verify)
+        self.attachment = AttachmentConnector(self.session, self.clean_domain(domain), verify)
+        
     def clean_domain(self, domain):
         return domain.replace("https://", "").replace("http://", "").replace(".proctorexam.com", "")
 

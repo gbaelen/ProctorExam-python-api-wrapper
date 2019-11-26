@@ -2,3 +2,5 @@ from Proctorexam.Endpoints.ExamConnector import ExamConnector
 from Proctorexam.Endpoints.StudentConnector import StudentConnector
 from Proctorexam.Endpoints.UserConnector import UserConnector
 from Proctorexam.Endpoints.InstituteConnector import InstituteConnector
+from Proctorexam.Endpoints.DocumentConnector import DocumentConnector
+from Proctorexam.Endpoints.AttachmentConnector import AttachmentConnector
