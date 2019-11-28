@@ -52,7 +52,7 @@ class ExamConnector(Api):
             param["id"] = id
 
         response = self._Api__get(path, param)
-        return self.process_get_response(path, response)
+        return response
 
     def get_all_students_in_exam(self, id):
         path = f"exams/{id}/index_students"
@@ -69,7 +69,7 @@ class ExamConnector(Api):
             param["student_session_id"] = student_id
 
         response = self._Api__get(path, param)
-        return self.process_get_response(path, response)
+        return response
 
     def get_student_in_exam_by_lti_id(self, student_lms_id, resource_link_id, exam_id):
         path = f"exams/{id}/show_lti_student"
@@ -80,10 +80,10 @@ class ExamConnector(Api):
         }
 
         response = self._Api__get(path, param)
-        return self.process_get_response(path, response)
+        return response
 
     def create_exam(self, path=None, param=None):
-        path = self.check_default_path(path)
+        path = "exams/"
 
         if param is None:
             raise Exception("Params in post cannot be empty!")
@@ -94,7 +94,7 @@ class ExamConnector(Api):
                 raise Exception("Exam type is a required param but not found")
 
         response = self._Api__post(path, param)
-        return self.process_post_response(path, response)
+        return response
 
     def register_student_in_exam(self, id, param={}):
         path = f"exams/{id}/add_student"
@@ -107,37 +107,37 @@ class ExamConnector(Api):
             raise Exception("Student email is a required param but not found")
 
         response = self._Api__post(path, param)
-        return self.process_post_response(path, response)
+        return response
 
     def update_exam(self, id, param={}):
-        path = "exams/" + id
+        path = f"exams/{id}"
 
         response = self._Api__patch(path, param)
-        return self.process_patch_response(path, response)
+        return response
 
     def send_all_exam_emails(self, id):
         path = f"exams/{id}/send_emails"
         param = {"id": id}
 
         response = self._Api__post(path, param)
-        return self.process_post_response(path, response)
+        return response
 
     def add_comanager_in_exam(self, exam_id, user_id):
         path = f"exams/{exam_id}/add_comanager"
         param = {"id": id, "comanager_id": user_id}
 
         response = self._Api__put(path, param)
-        return self.process_put_response(response)
+        return response
 
     def delete_exam(self, id):
         path = f"exams/{id}"
 
         response = self._Api__delete(path, {"id": id})
-        return self.process_delete_response(response)
+        return response
 
     def delete_comanager(self, exam_id, user_id):
         path = f"exams/{id}/remove_comanager"
         param = {"id": id, "comanager_id": user_id}
 
         response = self._Api__delete(path, param)
-        return self.process_delete_response(response)
+        return response
