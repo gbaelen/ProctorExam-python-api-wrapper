@@ -54,10 +54,13 @@ class ExamConnector(Api):
         response = self._Api__get(path, param)
         return response
 
-    def get_all_students_in_exam(self, id):
+    def get_all_students_in_exam(self, id, param={}):
         path = f"exams/{id}/index_students"
 
-        response = self._Api__get(path, {"id":id})
+        if "id" not in param:
+            param["id"] = id
+
+        response = self._Api__get(path, param)
         return response
 
     def get_student_in_exam_by_id(self, student_id, exam_id, param={}):

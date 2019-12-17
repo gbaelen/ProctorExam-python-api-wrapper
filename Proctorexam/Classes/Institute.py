@@ -4,7 +4,7 @@ class Institute():
 
     @staticmethod
     def generate_institute_from_response(data, connector=None):
-        return Institute(**data, connector)
+        return Institute(**data, connector=connector)
 
 class InstituteList():
     def __init__(self):
