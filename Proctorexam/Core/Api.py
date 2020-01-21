@@ -42,32 +42,32 @@ class Api():
         full_url = url + "?" + base_string.replace("?", "&")
 
         response = requests.get(full_url+"&signature="+signature, headers=self.header, verify=self.verify)
-        return response.content
+        return response
 
     def __post(self, path, param):
         url, base_string, signature, params = self.prepare_request(path, param)
         params["signature"] = signature
 
         response = requests.post(url, json=params, headers=self.header, verify=self.verify)
-        return response.content
+        return response
 
     def __patch(self, path, param):
         url, base_string, signature, params = self.prepare_request(path, param)
         params["signature"] = signature
 
         response = requests.patch(url, json=params, headers=self.header, verify=self.verify)
-        return response.content
+        return response
 
     def __delete(self, path, param):
         url, base_string, signature, params = self.prepare_request(path, param)
         params["signature"] = signature
 
         response = requests.delete(url, json=params, headers=self.header, verify=self.verify)
-        return response.content
+        return response
 
     def __put(self, param):
         url, base_string, signature, params = self.prepare_request(path, param)
         params["signature"] = signature
 
         response = requests.put(url, json=params, headers=self.header, verify=self.verify)
-        return response.content
+        return response

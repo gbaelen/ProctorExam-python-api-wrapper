@@ -1,5 +1,5 @@
 class Student():
-    def __init__(self, id=None, session_id=None, student_id=None, time_slot=None, created_at=None, updated_at=None, email="", pin_code=None, operating_system=None, browser=None, browser_version=None, status=None, token=None, screenshare_check=None, microphone_check=None, speakers_check=None, webcam_check=None, mobile_check=None, dummy_exam_survey=None, skip_requirements=None, send_confirmation=None, name=None, start_time=None, exam_id=None, expires_at=None, end_time=None, entered_room=None, reservation_time=None, exam_document_content_type=None, exam_document_file_size=None, exam_document_updated_at=None, reviewed=None, id_card_file_name=None, id_card_content_type=None, id_card_file_size=None, face_photo_file_name=None, face_photo_content_type=None, face_photo_file_size=None, bandwidth_check=None, bandwidth_speed=None, open_time=None, individual_info=None, rtc_session_id=None, in_setup=None, in_check_requirements=None, attempt=None, archived=None, current_exam_mode=None, rtc_session_ids=[], transcoding_status=None, is_individual_info_html=None, priority=None, recording_started_at=None, recording_ended_at=None, is_email_sent=None, pod_names=[], incidents=[], connector=None):
+    def __init__(self, id=None, session_id=None, student_id=None, time_slot=None, created_at=None, updated_at=None, email="", pin_code=None, operating_system=None, browser=None, browser_version=None, status=None, token=None, screenshare_check=None, microphone_check=None, speakers_check=None, webcam_check=None, mobile_check=None, dummy_exam_survey=None, skip_requirements=None, send_confirmation=None, name=None, start_time=None, exam_id=None, expires_at=None, end_time=None, entered_room=None, reservation_time=None, exam_document_content_type=None, exam_document_file_size=None, exam_document_updated_at=None, reviewed=None, id_card_file_name=None, id_card_content_type=None, id_card_file_size=None, face_photo_file_name=None, face_photo_content_type=None, face_photo_file_size=None, bandwidth_check=None, bandwidth_speed=None, open_time=None, individual_info=None, rtc_session_id=None, in_setup=None, in_check_requirements=None, attempt=None, archived=None, current_exam_mode=None, rtc_session_ids=[], transcoding_status=None, is_individual_info_html=None, priority=None, recording_started_at=None, recording_ended_at=None, is_email_sent=None, pod_names=[], incidents=[], review_commentary=None, connector=None):
         self.id=id
         self.session_id=session_id
         self.student_id=student_id
@@ -57,6 +57,7 @@ class Student():
         self.is_email_sent=is_email_sent
         self.pod_names=pod_names
         self.incidents=incidents
+        self.review_commentary=review_commentary
         self.connector=connector
 
     @staticmethod

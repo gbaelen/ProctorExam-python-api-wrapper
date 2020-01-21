@@ -16,8 +16,18 @@ class StudentConnector(Api):
             path = self.clean_path(path)
         return path
 
-    def process_post_response(self, path, response):
-        print(response)
+    def create_student_from_response(self, response):
+        json_response = json.loads(response.content)
+        status_code = response.status_code
+
+        if status_code == 201 or status_code == 200:
+            return Student.generate_student_from_response(json_response["student"], connector=self)
+        elif status_code == 401 or status_code == 403:
+            raise UnauthorizedError("User unauthorized", json_response)
+        elif status_code == 404:
+            raise NotFoundError("Student not found", json_response)
+        elif status_code == 422:
+            raise BadParametersError("Bad parameters sent", json_response)
 
     def process_patch_response(self, path, response):
         print(response)
@@ -27,7 +37,7 @@ class StudentConnector(Api):
 
     def process_get_response(self, path, response):
         if path == "student_sessions/":
-            return self.create_student_list(json.loads(response))
+            return self.create_student_list(json.loads(response.content))
         else:
             print("error")
             print(response)
@@ -54,7 +64,7 @@ class StudentConnector(Api):
             param["id"] = id
 
         response = self._Api__get(path, param)
-        return self.process_get_response(path, response)
+        return self.create_student_from_response(response)
 
     def add_to_exam(self, exam_id, params={}):
         path = f"exams/{exam_id}/student_sessions"
@@ -63,7 +73,7 @@ class StudentConnector(Api):
             param["id"] = exam_id
 
         response = self._Api__post(path, param)
-        return self.process_post_response(path, response)
+        return self.create_student_from_response(response)
 
     def edit_student(self, id, param={}):
         path = f"student_sessions/{id}"
@@ -79,3 +89,20 @@ class StudentConnector(Api):
 
         response = self._Api__delete(path, {"id": id})
         return self.process_delete_response(response)
+
+# Errors
+class BadParametersError(Exception):
+    def __init__(self, message, errors):
+        super(BadParametersError, self).__init__(message)
+        self.errors = errors
+
+class UnauthorizedError(Exception):
+    def __init__(self, message, errors):
+        super(UnauthorizedError, self).__init__(message)
+        self.errors = errors
+
+class NotFoundError(Exception):
+    def __init__(self, message, errors):
+        super(NotFoundError, self).__init__(message)
+        self.errors = errors
+
