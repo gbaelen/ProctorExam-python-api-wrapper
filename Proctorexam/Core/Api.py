@@ -47,7 +47,10 @@ class Api():
     def __post(self, path, param):
         url, base_string, signature, params = self.prepare_request(path, param)
         params["signature"] = signature
-
+        print(url)
+        print(base_string)
+        print(signature)
+        print(params)
         response = requests.post(url, json=params, headers=self.header, verify=self.verify)
         return response
 

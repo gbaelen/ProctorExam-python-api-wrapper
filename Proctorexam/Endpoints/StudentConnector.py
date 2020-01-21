@@ -66,11 +66,11 @@ class StudentConnector(Api):
         response = self._Api__get(path, param)
         return self.create_student_from_response(response)
 
-    def add_to_exam(self, exam_id, params={}):
+    def add_to_exam(self, exam_id, param={}):
         path = f"exams/{exam_id}/student_sessions"
 
         if "id" not in param:
-            param["id"] = exam_id
+            param["exam_id"] = exam_id
 
         response = self._Api__post(path, param)
         return self.create_student_from_response(response)
@@ -105,4 +105,3 @@ class NotFoundError(Exception):
     def __init__(self, message, errors):
         super(NotFoundError, self).__init__(message)
         self.errors = errors
-

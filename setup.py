@@ -13,6 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/gbaelen/ProctorExam-python-api-wrapper",
     packages=setuptools.find_packages(),
+    install_requires=[
+        'requests',
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: MIT License",
