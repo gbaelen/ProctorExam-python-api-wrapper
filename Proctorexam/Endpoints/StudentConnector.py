@@ -69,7 +69,7 @@ class StudentConnector(Api):
     def add_to_exam(self, exam_id, param={}):
         path = f"exams/{exam_id}/student_sessions"
 
-        if "id" not in param:
+        if "exam_id" not in param:
             param["exam_id"] = exam_id
 
         response = self._Api__post(path, param)
