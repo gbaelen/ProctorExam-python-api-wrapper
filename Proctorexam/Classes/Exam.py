@@ -1,42 +1,42 @@
 class Exam():
-    def __init__(self, id=None, institute_id=None, name="", terms=None, created_at=None, updated_at=None, duration_minutes=None, clipboard=None, start_time=None, mode=None, upload_answers=None, token=None, user_id=None, end_time=None, restrictions=None, published=None, status=None, for_reviewing=None, uploaded_exam_documents_file_name=None, uploaded_exam_documents_content_type=None, uploaded_exam_documents_file_size=None, uploaded_exam_documents_updated_at=None, timezone=None, use_duration=None, global_reviewing=None, global_proctoring=None, exam_language=None, archived=None, web_cam=None, mobile_cam=None, screen_share=None, live_proctoring=None, connector=None):
-        self.id = id
-        self.institute_id = institute_id
-        self.name = name
-        self.terms = terms
-        self.created_at = created_at
-        self.updated_at = updated_at
-        self.duration_minutes = duration_minutes
-        self.clipboard = clipboard
-        self.start_time = start_time
-        self.mode = mode
-        self.upload_answers = upload_answers
-        self.token = token
-        self.user_id = user_id
-        self.end_time = end_time
-        self.restrictions = restrictions
-        self.published = published
-        self.status = status
-        self.for_reviewing = for_reviewing
-        self.uploaded_exam_documents_file_name = uploaded_exam_documents_file_name
-        self.uploaded_exam_documents_content_type = uploaded_exam_documents_content_type
-        self.uploaded_exam_documents_file_size = uploaded_exam_documents_file_size
-        self.uploaded_exam_documents_updated_at = uploaded_exam_documents_updated_at
-        self.timezone = timezone
-        self.use_duration = use_duration
-        self.global_proctoring = global_proctoring
-        self.global_reviewing = global_reviewing
-        self.exam_language = exam_language
-        self.archived = archived
-        self.web_cam = web_cam
-        self.mobile_cam = mobile_cam
-        self.screen_share = screen_share
-        self.live_proctoring = live_proctoring
+    def __init__(self, data, connector=None):
+        self.id = data["id"]
+        self.institute_id = data["institute_id"]
+        self.name = data["name"]
+        self.terms = data["terms"]
+        self.created_at = data["created_at"]
+        self.updated_at = data["updated_at"]
+        self.duration_minutes = data["duration_minutes"]
+        self.clipboard = data["clipboard"]
+        self.start_time = data["start_time"]
+        self.mode = data["mode"]
+        self.upload_answers = data["upload_answers"]
+        self.token = data["token"]
+        self.user_id = data["user_id"]
+        self.end_time = data["end_time"]
+        self.restrictions = data["restrictions"]
+        self.published = data["published"]
+        self.status = data["status"]
+        self.for_reviewing = data["for_reviewing"]
+        self.uploaded_exam_documents_file_name = data["uploaded_exam_documents_file_name"]
+        self.uploaded_exam_documents_content_type = data["uploaded_exam_documents_content_type"]
+        self.uploaded_exam_documents_file_size = data["uploaded_exam_documents_file_size"]
+        self.uploaded_exam_documents_updated_at = data["uploaded_exam_documents_updated_at"]
+        self.timezone = data["timezone"]
+        self.use_duration = data["use_duration"]
+        self.global_proctoring = data["global_proctoring"]
+        self.global_reviewing = data["global_reviewing"]
+        self.exam_language = data["exam_language"]
+        self.archived = data["archived"]
+        self.web_cam = data["web_cam"]
+        self.mobile_cam = data["mobile_cam"]
+        self.screen_share = data["screen_share"]
+        self.live_proctoring = data["live_proctoring"]
         self.connector = connector
 
     @staticmethod
     def generate_exam_from_response(data, connector=None):
-        return Exam(**data, connector=connector)
+        return Exam(data, connector=connector)
 
     def get_exam_type(self):
         if self.mode[4] is "1":
